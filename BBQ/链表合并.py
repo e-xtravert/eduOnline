@@ -15,6 +15,18 @@
 # @param target int整型
 # @return int整型一维数组
 #
+
+# class ListNode:
+#     def __init__(self, data):
+#         self.data = data
+#         self.next = None
+#         return
+#
+# # 这是创建一个值为几的链表
+# head = ListNode(1)
+#
+# print(head.data)
+
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
         # write code here
