@@ -31,6 +31,7 @@ class Solution:
         res = 0
         a = 1
         b = 1
+        # 下面是求n的数，循环次数要从1开始就要使用n，如果是0开始就循环到n+1见上面
         for i in range(2, number + 1):
             res = a + b
             a = b
@@ -48,5 +49,32 @@ class Solution:
         return self.jumpFloor(number - 1) + self.jumpFloor(number - 2)
 
 
+# fibonacci数列
+#
+# 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+#
+#
+# @param n int整型
+# @return int整型
+#
+class Solution:
+    def Fibonacci(self, n: int) -> int:
+        # write code here
+        # 不知道为什么不行了这个
+        # if n <= 2:
+        #     return 1
+        # return self.Fibonacci(n - 1) + self.Fibonacci(n - 2)
+
+        if n <= 2:
+            return 1
+        res = 0
+        a = 1
+        b = 1
+        # 下面是求n的数，循环次数要从1开始就要使用n，如果是0开始就循环到n+1见上面
+        for i in range(2, n):
+            res = a + b
+            a = b
+            b = res
+        return res
 
 
