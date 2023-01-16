@@ -27,7 +27,7 @@ class Solution:
         maxsum = dp[0] # 也是做动态分析，选择最大值
         for i in range(1, len(array)):
             # 状态转移：连续子数组和最大值
-            # 原理是前i项和第i项相加若是更大则选，变小说明第i项是更大的
+            # 原理是前i项和第i项相加若是更大则选，变小说明第i项是更大的，这个状态转移函数要熟悉
             dp[i] = max(dp[i - 1] + array[i], array[i])
             # 维护最大值
             maxsum = max(maxsum, dp[i])
