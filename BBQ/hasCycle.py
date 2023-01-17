@@ -32,7 +32,17 @@ class Solution:
             if slow == fast:
                 return True
         return False
+# 哈希法，通过是通过了，但是感觉不对，如果链表里面有重复的元素还需要别的处理方法
+        hash = dict()
 
+        head0 = head
+        while head0 != None:
+            if head0 not in hash:
+                hash[head0] = 1
+                head0 = head0.next
+            else:
+                return True
 
+        return False
 
 
