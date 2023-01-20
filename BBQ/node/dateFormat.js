@@ -20,5 +20,5 @@ function padZero(n) {
 
 
 module.exports = {
-  dateFormat: dateFormat()
+  dateFormat
 }
