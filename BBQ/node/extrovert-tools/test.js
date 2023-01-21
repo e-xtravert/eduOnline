@@ -2,7 +2,7 @@ const htmlEscape = require("./index")
 
 // console.log(htmlEscape)
 
-const htmlStr = '<h1 title="abc">这是h1标签<span>123&nbsp;</aspan></hh1>'
+const htmlStr = '<h1 title="abc">这是h1标签<span>123&nbsp;</aspan></h1>'
 
 const dt = new Date()
 console.log(dt)
