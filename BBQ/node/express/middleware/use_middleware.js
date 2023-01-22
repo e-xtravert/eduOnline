@@ -3,12 +3,16 @@ const express = require('express')
 const app = express()
 
 //定义一个最简单的中间件函数
-// const mw = function (req, res, next) {
-//   console.log('这是最简单的中间件函数')
-//   //把流转关系，转交给下一个中间件或路由
-//   next()
-// }
+const mw = function (req, res, next) {
+  console.log('这是最简单的中间件函数，局部中间件')
+  //把流转关系，转交给下一个中间件或路由
+  next()
+}
 
+const mw1 = function (req, res, next) {
+  console.log('this is second part middleware')
+  next()
+}
 //挂载到app.use上就是全局中间件，放到路由里面当形参就是局部中间件
 app.use(function (req, res, next) {
   console.log('这是最简单的中间件函数')
@@ -22,8 +26,8 @@ app.use(function (req, res, next) {
   console.log('this is the second middleware')
   next()
 })
-
-app.get('/', (req, res) => {
+//定义多个part 有效中间件,中括号可加可不加
+app.get('/zjb', [mw, mw1], (req, res) => {
   console.log('1323')
   res.send("hello express" + req.startTime)
 })
