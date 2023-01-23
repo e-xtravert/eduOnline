@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
 
+
+//这个中间件要写在上面，不然输出undefined
+app.use(express.json())
+// app.use(express.urlencoded({extended: false}))
+
 const router = require('./apiRouter')
-
-
-
 //这个/api是跟路径？
 app.use('/api', router.router)
 
