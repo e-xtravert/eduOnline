@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const app = express()
 
 
@@ -6,6 +7,7 @@ const app = express()
 app.use(express.json())
 // app.use(express.urlencoded({extended: false}))
 
+app.use(cors())
 const router = require('./apiRouter')
 //这个/api是跟路径？
 app.use('/api', router.router)

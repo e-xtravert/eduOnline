@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <title>Title</title>
+</head>
+<body>
+<button id="get">GET</button>
+<button id="post">post</button>
+
+<script>
+  // 取id使用#符号
+  $(function () {
+    $('#get').on('click', function () {
+      $.ajax({
+        type: 'GET',
+        url: 'http://127.0.0.1/api/get',
+        data: {name: 'zjb', age: 23},
+        success: function (res) {
+          console.log(res)
+        }
+      })
+    })
+  })
+
+  $(function () {
+    $('#post').on('click', function () {
+      $.ajax({
+        type: 'POST',
+        url: 'http://127.0.0.1/api/post',
+        data: {bookname: 'qwe', author: 'sna'},
+        success: function (res) {
+          console.log(res)
+        }
+      })
+    })
+  })
+</script>
+</body>
+
+</html>
