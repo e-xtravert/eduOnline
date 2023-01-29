@@ -56,5 +56,27 @@ class Solution:
             res.append(row)
 
         return res
+'''
+打印二叉树
+'''
+import queue
 
 
+class Solution:
+    def PrintFromTopToBottom(self, root: TreeNode) -> List[int]:
+        res = []
+        if not root:
+            # 如果是空，则直接返回空数组
+            return res
+        # 队列存储，进行层次遍历
+        q = queue.Queue()
+        q.put(root)
+        while not q.empty():
+            cur = q.get()
+            res.append(cur.val)
+            # 若是左右孩子存在，则存入左右孩子作为下一个层次
+            if cur.left:
+                q.put(cur.left)
+            if cur.right:
+                q.put(cur.right)
+        return res
