@@ -80,3 +80,49 @@ class Solution:
             if cur.right:
                 q.put(cur.right)
         return res
+
+
+'''
+按层打印二叉树
+
+'''
+
+import queue
+
+
+class Solution:
+    def Print(self, root: TreeNode) -> List[int]:
+
+        # res = []
+        # head = root
+        # if not head:
+        #     return res
+
+        # q = queue.Queue()
+        # q.put(head)
+
+        # while not q.empty():
+
+        #     p = q.get()
+
+        res = []
+        if not root:
+            return res
+
+        q = [root]  # 这里直接放进数组里，后面因为用到了两个循环直接一个个pop出去了，所以没有用队列，用队列可以不用两次循环，但是第二个循环是为了打印二维数组，所以需要
+        while q:
+            row = []
+            n = len(q)
+
+            for i in range(n):
+                node = q.pop(0)
+                row.append(node.val)
+
+            if node.left:
+                q.append(node.left)
+            if node.right:
+                q.append(node.right)
+
+            res.append(row)  # 这里循环一次，就会把一层的节点放进res，再次循环row又是空的了
+
+        return res
