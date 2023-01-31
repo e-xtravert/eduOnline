@@ -22,7 +22,7 @@ class Solution:
         # if number == 1:
         #     return 1
 
-        # return jumpFloor(number - 1) + jumpFloor(number - 2)
+        # return jumpFloor(number - 1) + jumpFloor(number - 2) 或者直接把他的方法删掉，然后自定义函数时可以return自己的
 
 
         if number <= 1:
@@ -78,3 +78,26 @@ class Solution:
         return res
 
 
+# 第n编递归还是不能秒了
+import sys
+
+# 实际还是fabonicci
+inp = int(input())
+
+# print(inp)
+
+
+
+if inp <= 1:
+    print(1)
+else:
+    res = 0
+    a = 1
+    b = 1
+
+    for i in range(2, inp + 1):
+        res = a + b
+        a = b
+        b = res
+
+    print(res)
