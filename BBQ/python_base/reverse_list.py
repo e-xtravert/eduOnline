@@ -24,3 +24,23 @@ class Solution:
                 p0 = p1
                 p1 = tem
             return p0
+
+
+        # # 反转链表二刷
+        if head == None:
+            return head
+
+        else:
+            pre = None
+            cur = head
+
+            while cur is not None:
+                temp = cur.next
+                cur.next = pre
+
+                pre = cur
+                cur = temp
+
+            # 这里不能return cur，cur这个时候已经到最末尾的下一个节点了，return是个空的
+            return pre
+

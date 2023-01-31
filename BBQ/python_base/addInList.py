@@ -60,3 +60,4 @@ class Solution:
                 head2 = head2.next
 
         return self.ReverseList(res.next)
+
