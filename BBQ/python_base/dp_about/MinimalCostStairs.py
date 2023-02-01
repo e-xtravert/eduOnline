@@ -20,12 +20,12 @@ cost = [int(i) for i in input().split()]
 #     # 一直以为第一层也需要费用，但是题目说可以从下标为0台阶开始，也可以从下标为1台阶开始
 #     # 那么台阶0和台阶1都是费用为0，不需要花费费用就可以到达
 #     # 这么看来根据题目的设置，台阶数为0或1都是没意义的
-#     dp = [0 for i in range(num + 1)]
+#     dp_about_lqb = [0 for i in range(num + 1)]
 #     for i in range(2, num + 1):
 
-#         dp[i] = min(dp[i - 1] + lis[i - 1], dp[i - 2] + lis[i - 2])
-#     # print(dp)
-#     return dp[num]
+#         dp_about_lqb[i] = min(dp_about_lqb[i - 1] + lis[i - 1], dp_about_lqb[i - 2] + lis[i - 2])
+#     # print(dp_about_lqb)
+#     return dp_about_lqb[num]
 # # print(num, cost)
 # print(min_cost(cost))
 
