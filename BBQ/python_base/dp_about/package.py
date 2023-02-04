@@ -47,9 +47,7 @@ for i in range(n):
         dp[i] = max(dp[i - 1], dp[V - v[i]] + w[i])
 
 
-
 # dp[i] = max(dp[i - 1], dp[V - v[i]] + w[i])，当背包恰好装满就多一个i <= 容量的条件就行了呗？
-
 
 
 print(n, V, v, w, dp)
