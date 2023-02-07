@@ -11,6 +11,8 @@ for i in range(n):
     v.append(lis[1])
     w.append(lis[0])
 
+
+
 # dp = [[0] * (V + 1) for i in range(n)]
 dp0 = [0 for i in range(V + 1)]
 dp1 = [float('-inf') for _ in range(V + 1)]
