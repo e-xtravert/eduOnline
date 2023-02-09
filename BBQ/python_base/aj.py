@@ -89,9 +89,13 @@
 #
 # # dp_about_lqb[i][j] = dp_about_lqb[i][j] + max(dp_about_lqb[i- 1][j], dp_about_lqb[i][j - 1])
 # print(n, m, map1[2][4], dp[n - 1][m - 1])
-res = 0
-for i in range(-1, -2):
-  res = i
-  print(i)
+# res = 0
+# for i in range(-1, -2):
+#   res = i
+#   print(i)
+#
+# print(res)
 
-print(res)
+ids = [1, 102, 5, 7]
+ids.sort()
+print(ids)
