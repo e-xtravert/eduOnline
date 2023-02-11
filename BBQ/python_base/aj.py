@@ -96,6 +96,11 @@
 #
 # print(res)
 
-ids = [1, 102, 5, 7]
-ids.sort()
-print(ids)
+# ids = [1, 102, 5, 7]
+# ids.sort()
+# print(ids)
+
+lis = [[1, 2], [2, 3], [3, 4]]
+# 数组解构
+for wid, hig in lis:
+    print(wid + hig)
