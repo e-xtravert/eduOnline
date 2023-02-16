@@ -100,7 +100,19 @@
 # ids.sort()
 # print(ids)
 
-lis = [[1, 2], [2, 3], [3, 4]]
-# 数组解构
-for wid, hig in lis:
-    print(wid + hig)
+# lis = [[1, 2], [2, 3], [3, 4]]
+# # 数组解构
+# for wid, hig in lis:
+#     print(wid + hig)
+
+
+has = dict()
+
+for i in range(1, 4):
+    has[i] = i + 1
+
+res = []
+for i in has:  # get keys
+    res.append(i)
+
+print(has, res)
