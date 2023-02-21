@@ -11,8 +11,8 @@
 
 n = int(input())
 lis = [int(i) for i in input().split()]
-
-
+vis = [0 for _ in range(n + 1)]
+res = 0
 
 
 print(n, lis)
