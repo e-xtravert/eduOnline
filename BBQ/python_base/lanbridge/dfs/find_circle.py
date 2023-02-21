@@ -27,7 +27,9 @@ vis = [False] * (n + 1)
 for i in range(n):
     u, v = map(int, input().split())
     edge[u].append(v)
-    edge[v].append(u)
+    edge[v].append(u)  # 邻接表写法
+
+print(edge)
 
 
 def dfs(x, fa):
@@ -49,4 +51,4 @@ def dfs(x, fa):
 dfs(1, 0)
 ring.sort()
 for k in ring:
-    print(k, end=' ')
+    print(k, end='over')  # 1over2over3over5over
