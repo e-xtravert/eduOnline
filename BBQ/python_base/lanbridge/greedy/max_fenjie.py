@@ -17,6 +17,7 @@ res = []
 path = []
 
 
+
 def max_len(num):
     for i in range(1, num + 1):
         if num % i == 0:
