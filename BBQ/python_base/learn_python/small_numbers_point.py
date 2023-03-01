@@ -8,4 +8,9 @@ print("%.4f" % a)
 
 
 arr = [[0] * b] * c
+arr1 = [[0] * b for _ in range(c + 1)]
 print(arr)
+print(arr1)
+
+print(1 / 3)
+print(1 // 3)

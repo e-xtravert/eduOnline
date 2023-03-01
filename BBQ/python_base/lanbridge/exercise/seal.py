@@ -13,10 +13,13 @@
 	该情况，第i张印章图案只能是n种图案中排除j-1种图案余下的图案，概率为[n-(j-1)](1/n)，因此该情况的概率为dp[i-1][j-1]*[n-(j-1)](1/n)
 '''
 import math
-
+# n种图案，买了m张牌
+# 集齐了j种，买了i张牌
 n, m = map(int, input().split())
-dp = [[0] * (m + 1)] * (n + 1)
-p = 1.0 // n
+# dp = [[0] * (n + 1)] * (m + 1)  # 终于知道为什么了，这样的话，他等于是把dp[[0] * (n + 1)]]复制了 (m + 1) 份，初始化还是要用下面的方法
+dp = [[0] * (n + 1) for _ in range(m + 1)]
+# p = 1.0 // n  # 这里直接向下取整了，怪不得没有数据，全是0，要用一个斜杠，这里是需要小数的
+p = 1 / n
 # 假设购买了i张印章，集齐了j张
 # 概率从还需要集齐什么图案去考虑
 for i in range(1, m + 1):  # m张印章
@@ -24,12 +27,12 @@ for i in range(1, m + 1):  # m张印章
         if i < j:
             dp[i][j] = 0
         if j == 1:
-            for t in range(i - 1):
-                dp[i][j] *= p
+            dp[i][j] = p ** (i - 1)  # 两个*表示乘方
+            # for t in range(i - 1):
+            # dp[i][j] = math.pow(p, i - 1)
+        else:
+            dp[i][j] = dp[i - 1][j] * j * p + dp[i - 1][j - 1] * (n - j + 1) * p
 
-        dp[i][j] = dp[i - 1][j] * j * p + dp[i - 1][j - 1] * (n - j + 1) * p
-
-
-
-
-print(n, m, dp[m][n])
+# print(n, m, f"{dp[m][n]: .4f}")
+print("%.4f" % dp[m][n])  # 第一次提交有一个空格多， 注意引号里面的百分号后面不要加空格
+# print(dp)
