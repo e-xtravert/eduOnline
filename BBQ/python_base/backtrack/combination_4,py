@@ -1,0 +1,46 @@
+'''
+题目描述 该题的要求与上一题有两点不同：candidates数组中可能包含重复元素；candidates中的每个数字仅能选择一次。并且不能包含重复的解集合，其他要求均相同。
+如是如输入数组为candidates = [10, 1, 2, 7, 6, 1, 5]、目标数为target = 8，则返回结果为[[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]]。
+该题的解法与第三个问题-全排列Ⅱ基本一致，不过后者要求的是直接输出所有组合，而本题做了每个组合的和必须等于目标数target的限制。
+这里我们额外定义函数，求一条路径上的元素总和。由于不能包含重复的解集合且每个数字仅能选择一次，我们还要结合第四个问题-组合的思路。
+最后，如果路径上的元素总和大于给定的目标数，则没有必须再往下执行，这是回溯法的一种剪枝。程序如下：
+10 1 2 7 6 1 5
+8
+'''
+# 想的多了都是问题，做得多了都是答案
+path = []
+res = []
+lis = [int(i) for i in input().split()]
+lis.sort()
+vis = [0 for i in range(len(lis))]  # 一般是数组中有重复数字，判断是否需要添加的时候用
+target_sum = int(input())
+
+
+def path_sum(arr):
+    s = 0
+    for i in range(len(arr)):
+        s += arr[i]
+    return s
+
+
+# 先判断结束条件，然后循环，在循环里面回调，标记，back，然后退出
+def backtrack(start, arr, target, v):
+    if path_sum(path) >= target:
+        if path_sum(path) == target:
+            res.append(path[:])  # 这里不把原数组排好序的话，就会出现重复结果，想在这里再判断一下，但是有点麻烦，还是需要用到排序，不如直接就先排好序
+
+    for i in range(start, len(arr)):
+        if arr[i] == arr[i - 1] and not v[i - 1]:  # 如果不加这个vis条件，数组中有重复元素，虽然不能重复取，但是重复的不同元素也不能取了
+            continue
+        # 就为了解决给定数组中会重复元素元素造成的干扰需要加好几行代码
+        if v[i] == 1:
+            continue
+        v[i] = 1
+        path.append(arr[i])
+        backtrack(i + 1, arr, target, v)
+        v[i] = 0
+        path.pop(-1)
+
+
+backtrack(0, lis, target_sum, vis)
+print(res)
