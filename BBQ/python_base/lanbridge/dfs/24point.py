@@ -33,9 +33,13 @@
 
 n = int(input())
 lis = [[0] * 4 for _ in range(n)]
+# 一个for循环的做法，直接append进以一维数组里面就得
+# lis = [[] * 4 for _ in range(n)]
 for i in range(n):
+    # lis[i].append(int(input()))
     for j in range(4):
         lis[i][j] = int(input())
+
 res = []
 dp_max = []
 
@@ -75,6 +79,6 @@ def dfs(cur_ans, arr, i):
 
         dp_max.append(cur_ans)
 
-
+# 我可以在这里循环啊，把二维数组当做一维数组挨个取出来，然后每一个元素就是一个4位数字的数组，再放进去就好做很多
 dfs(0, lis, 0)
 print(n, lis, res, dp_max)
