@@ -1,9 +1,13 @@
 '''
 格式化时间
+46800999
+13:00:00
+1618708103123
+01:08:23
 '''
 
 
-n = int(input())
+n = int(input()) // 1000
 
 
 def add_zero(time):
@@ -13,16 +17,15 @@ def add_zero(time):
     return str(time)
 
 
-# 因为有可能是很大的数字，并不是单纯的一天的时间，取个余就完了
+# 因为有可能是很大的数字，并不是单纯的一天的时间，取个余就完了，最后转换到一天的时间里面就可以计算了
 def format_time(time):
-    time = time % (365 * 24 * 60 * 60)
-    if time > 24 * 3600000:
-        time = time % (24 * 3600000)
-    print(time)
-    time_s = time // 1
-    hh = time_s // 3600 % 24
-    mm = (time_s // 60 - time_s // 3600 * 60) % 60
-    ss = (time_s - time_s // 3600 * 3600) % 60
+    if time > 365 * 24 * 3600:
+        time = time % 365 * 24 * 3600
+    if time > 24 * 3600:
+        time = time % 24 * 3600
+    hh = time // 3600
+    mm = (time - hh * 3600) // 60
+    ss = time - hh * 3600 - mm * 60
     h = add_zero(hh)
     m = add_zero(mm)
     s = add_zero(ss)
