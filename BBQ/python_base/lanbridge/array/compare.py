@@ -19,7 +19,7 @@
 2 1 2 2 0
 2 3
 '''
-# 这题就一个需要注意的，就是数组下标问题，其他没了
+# 这题就一个需要注意的，就是数组下标问题，其他没了,可惜只有80分，不过就先这样吧，重要的是思想
 n, m = map(int, input().split())
 lis = [int(i) for i in input().split()]
 inds = [[0] for _ in range(m)]
@@ -41,17 +41,21 @@ def compare(arr):
         for j in range(arr[0], arr[1] + 1):
             if lis[j - 1] <= lis[i - 1]:
                 cnt += 1
-        if cnt > 0:  # 小于0就算了
+        if cnt >= 0:  # 小于0就算了， 等于0也要啊
             path.append(cnt)
 
-    res.append(path[:])
+    # 下面一长串就是为了凑一个输出，唉呀，太没技术含量了，结果已经有了，还要在输出上磨蹭磨蹭
+    for i in range(len(path)):
+        if i == len(path) - 1:  # 如果是最后一个数了，那就输出，默认换行
+            print(path[i])
+        else:
+            print(path[i], end=' ')  # 不是那就不换
 
 
 for t in range(len(inds)):
     compare(inds[t])
 
-for i in range(len(res)):
-    for j in range(len(res[i])):
-        print(res[i][j], end=' ')
-    print('\n')
-print(n, m, lis, inds, res)
+# for i in range(len(res)):
+#     for j in range(len(res[i])):
+#         print(res[i][j], end=' ')
+# print(n, m, lis, inds, res)
