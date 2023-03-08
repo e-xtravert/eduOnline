@@ -22,7 +22,7 @@ vx = [0 for _ in range(m)]  # 表示第i列是否访问
 vy = [0 for _ in range(n)]  # 表示行是否访问
 res = 0
 
-
+# 对访问过的数不需要再次用到则是dfs，这里用backtrack应该也可以？ -2023年3月8日
 # 答案的做法是这里当前炸弹置0，然后无差别搜索当前行，列每一个元素，我直接从后面搜索
 def dfs(row, column):
     if not vx[row]:
