@@ -10,10 +10,10 @@
 #         self.left = left
 #         self.right = right
 
-# 用bfs求到的就是最小的，为什么呢？是不是因为是第一个出现的最短的，还是需要加一个vis判断是否访问过，然后
+# 用bfs求到的就是最小的，为什么呢？是不是因为是第一个出现的最短的，还是需要加一个vis判断是否访问过，然后 == 表示 is
 class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
-        if root == None:
+        if root is None:
             return 0
 
         queen = []
@@ -26,13 +26,13 @@ class Solution:
             for i in range(size):  # 这里循环有必要吗？每次都放一个节点，不全部放进去，会造成不能得出最短的结果，那就会是第一个放进去的分支上的最短的
                 node = queen.pop(0)  # 弹出数组最前方的元素
 
-                if node.left == None and node.right == None:
+                if node.left is None and node.right is None:
                     return res
 
-                if node.left != None:
+                if node.left is not None:
                     queen.append(node.left)
 
-                if node.right != None:
+                if node.right is not None:
                     queen.append(node.right)
 
             res += 1  # while循环一次确定一个点
