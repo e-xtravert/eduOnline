@@ -10,3 +10,5 @@ is_choose = [0 * 4]
 print(has, is_choose)
 
 
+
+

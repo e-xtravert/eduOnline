@@ -15,10 +15,28 @@
 样列输出
 6
 '''
+# 确实不如二分
 n, s = map(int, input().split())
 gifts = [int(i) for i in input().split()]
+res = 0
 
 
+def _sum(arr, start, end):
+    sum_ = 0
+    for i in range(start, end):
+        sum_ += arr[i]
+
+    return sum_
 
 
-print(n, s, gifts)
+mid = len(gifts) // 2
+# 这里控制条件还是需要调整
+while mid:
+    if _sum(gifts, 0, mid) <= s and _sum(gifts, mid, mid * 2) <= s:
+        res = mid * 2
+        break
+    else:
+        mid = mid // 2
+
+
+print(n, s, gifts, res)
