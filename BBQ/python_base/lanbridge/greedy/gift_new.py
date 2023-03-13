@@ -15,30 +15,35 @@
 样列输出
 6
 '''
-# 确实不如二分
+
+# 明天再找几个二分的题目做一下先，根据结果，选择区间，不断二分渐进
 n, s = map(int, input().split())
 gifts = [int(i) for i in input().split()]
-res = 0
+val = [0 for _ in range(n)]  # 用来计算前缀和
+
+# 下面是一种计算前缀和的方法，有点像动态规划,适合一些求数组前后段的和，不妨设置成差的形式
+for i in range(n):
+    val[i] = gifts[i] + val[i - 1]
 
 
-def _sum(arr, start, end):
-    sum_ = 0
-    for i in range(start, end):
-        sum_ += arr[i]
-
-    return sum_
+# 首先用哪种方法，对其中思想一定要熟悉
 
 
-mid = len(gifts) // 2
-# 这里控制条件还是需要调整
-# 当然要调整了，二分不只是平分，首尾位置也要记录啊
-# 而且过程也不对，，应该是把mid当作参数，然后
-while mid:
-    if _sum(gifts, 0, mid) <= s and _sum(gifts, mid, mid * 2) <= s:
-        res = mid * 2
-        break
+def check(item):
+    for i in range(item, n - item + 1):
+        if val[i] - val[item] <= s and val[i + item] - val[i] <= s:
+            return True
+
+    return False
+
+
+l = 1
+r = int(1e6)  # 10的6次方，浮点数
+while l < r:
+    mid = (l + r + 1) // 2  # 原文是用了再二进制的形式上右移1位的手段达到除2的目的
+    if check(mid):
+        l = mid
     else:
-        mid = mid // 2
-
-
-print(n, s, gifts, res)
+        r = mid - 1
+# print(n, s, gifts, val, 2 * l)
+print(2 * l)
