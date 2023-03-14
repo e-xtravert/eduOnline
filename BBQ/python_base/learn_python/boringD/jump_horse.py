@@ -17,34 +17,37 @@ sys.setrecursionlimit(100000)
 posi = [int(i) for i in input().split()]
 x, y = posi[0], posi[1]
 x1, y1 = posi[2], posi[3]
-item = 0
+step = 0
 
 
-def dfs(x_, y_, x1_, y1_, step):
+def dfs(x_, y_, x1_, y1_):
+    global step
+    if x_ > 8 or y_ > 8 or x_ < 0 or y < 0:
+        return
     if x_ == x1_ and y_ == y1_:
-        print(step)
         return
 
     if x_ > x1_ or y_ > y1_:
-        print(-1)
         return
 
     # 如果目标在右上角，那么往左边遍历肯定是到不了的， 往对应方向遍历
     if x_ < x1_ and y_ < y1_:
-        dfs(x_ + 1, y_ + 2, x1_, y1_, step + 1)
-        dfs(x_ + 2, y_ + 1, x1_, y1_, step + 1)
+        dfs(x_ + 1, y_ + 2, x1_, y1_)  # 在这里加step其实是不合理的，因为不知道这个点是不是真的通过了
+        dfs(x_ + 2, y_ + 1, x1_, y1_)
 
     if x_ < x1_ and y_ > y1_:
-        dfs(x_ + 1, y1_ - 2, x1_, y1_, step + 1)
-        dfs(x_ + 2, y1_ - 1, x1_, y1_, step + 1)
+        dfs(x_ + 1, y1_ - 2, x1_, y1_)
+        dfs(x_ + 2, y1_ - 1, x1_, y1_)
 
     if x_ > x1_ and y_ < y1_:
-        dfs(x_ - 1, y_ + 2, x1_, y1_, step + 1)
-        dfs(x_ - 2, y_ + 1, x1_, y1_, step + 1)
+        dfs(x_ - 1, y_ + 2, x1_, y1_)
+        dfs(x_ - 2, y_ + 1, x1_, y1_)
 
     if x_ < x1_ and y_ < y1_:
-        dfs(x_ - 1, y_ - 2, x1_, y1_, step + 1)
-        dfs(x_ - 2, y_ - 1, x1_, y1_, step + 1)
+        dfs(x_ - 1, y_ - 2, x1_, y1_)
+        dfs(x_ - 2, y_ - 1, x1_, y1_)
 
+    step += 1
 
-dfs(x, y, x1, y1, item)
+dfs(x, y, x1, y1)
+print(step)

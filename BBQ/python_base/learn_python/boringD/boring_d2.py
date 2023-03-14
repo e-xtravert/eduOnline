@@ -18,12 +18,14 @@ n = int(input())
 sticks = [int(i) for i in input().split()]
 add = sum(sticks) // 2
 max_sum = 0
+min_sum = float('inf')
 
 sticks.sort(reverse=True)  # true是降序
 
 for i in range(n):
     if add - max_sum >= sticks[i]:  # 他这里 add再变化， max_sum也在变，其实和dfs原理是一样，只不过这是公式
         max_sum += sticks[i]  # 也是分堆，只不过这里直接把右边那堆给到max_sum了
+        min_sum = min(min_sum, add - max_sum)
 
 
-print(max_sum)
+print(max_sum, min_sum)
