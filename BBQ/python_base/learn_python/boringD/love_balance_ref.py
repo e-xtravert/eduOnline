@@ -1,3 +1,4 @@
+# @Time    : 2023/3/15 16:34
 '''
 问题描述
 　　娜娜是一个特别可爱的女孩子，作为学神的她最近在情感方面出现了一点点小问题。
@@ -23,53 +24,39 @@
 样例输出
 4 6 9
 20
-样例说明
-　　先把4和6先后分入A组，再把20分入B组，最后把9分入A组。
-数据规模和约定
-　　很小，真的很小。
 '''
-# 2023年3月15日
-# 设置了一下模板，每次敲代码可以自动键入时间信息
+# 没测试，不想做了，谢谢
 n, r = map(int, input().split())
 nums = [int(i) for i in input().split()]
-a_, b_ = nums[0], 0
-a, b = [], []
-vis = [0 for i in range(n)]
-a.append(nums[0])
-vis[0] = 1
+vis = [0 for _ in range(n)]
 
 
-# 题目说每次移动都要小于，每次付出双方都要平衡，而不是最后的平衡
-def func(x):
-    global a_, b_
-
-    if x >= n:
-        if abs(a_ - b_) >= r:
-            return 0
-        return 1
-
-    if abs(a_ - b_) >= r:
+def check(d, l_, r_):
+    if abs(d) > r:
         return 0
-
-# 应该把判断条件和这些分开写，不然这里面递归不好写，先交了，吃完饭再来写
+    if len(l_) + len(r_) == n:
+        if nums[0] in l_:
+            print(l_)
+        else:
+            print(r_)
+        return 1
     for i in range(n):
-        if vis[x] == 0:
-            vis[x] = 1
-            a.append(nums[x])  # a组
-            # 这里要进行判断，再去取舍，这跟粘木棍又不一样了
-            a_ += nums[x]
-            func(x + 1)
+        if not vis[i]:
+            vis[i] = 1
 
-            a.pop(-1)
-            b.append(nums[x])  # b组
-            a_ -= nums[x]
-            b_ += nums[x]
-            func(x + 1)
+            l_.appeng(nums[i])
+            if check(d + nums[i], l_, r_) == 1:
+                break
 
-            b.pop(-1)
-            b_ -= nums[x]
-            vis[x] = 0
+            l_.pop(-1)
+
+            r_.append(nums[i])
+            if check(d + nums[i], l_, r_) == 1:
+                break
+            r_.pop(-1)
+
+            vis[i] = 0
+    return 0
 
 
-func(1)
-print(n, r, nums, a, b)
+print(nums)
