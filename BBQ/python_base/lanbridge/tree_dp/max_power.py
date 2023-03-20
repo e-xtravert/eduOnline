@@ -33,7 +33,7 @@ sum = [0 for i in range(n+1)]  # 记录技能和
 
 def dfs(u, father):
     for i in range(len(edge[u])):  # edge数组中保存的是以某个技能编号为下标的一个个数组，数组内容是后续技能编号和 技能值
-        v = edge[u][i][0]
+        v = edge[u][i][0]  # 要么选，要么不选
         w = edge[u][i][1]
         if v == father:
             continue
