@@ -17,6 +17,7 @@ struct Edge
     int next,to;
 } e[MAXN];
 int head[MAXN],ecnt=0;
+//看了一个视频，说next是上一条边，那么to就是终点节点
 inline void add(int u,int v)
 {
     ++ecnt;
@@ -28,12 +29,13 @@ inline void add(int u,int v)
 int m;
 int dp[MAXN][MAXM];
 
+//这里是先扫面根节点
 void solve(int u)
 {
     for(int i=head[u]; i; i=e[i].next)
-        solve(e[i].to);//先处理子节点
+        solve(e[i].to);//先处理子节点  这里不断地dfs最终会到达最后一层子节点的位置，即叶子节点
 
-    //背包部分
+    //背包部分 遍历这一层叶子节点
     for(int i=head[u]; i; i=e[i].next)
         for(int j=m, v=e[i].to; j>0; --j)
             for(int k=0; k<j; ++k)
