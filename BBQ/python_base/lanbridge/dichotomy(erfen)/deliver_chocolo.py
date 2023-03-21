@@ -31,7 +31,7 @@ cholo = [[*map(int, input().split())] for _ in range(n)]
 def check(w):
     nums = 0
     for wid, hig in cholo:
-        nums += (wid // w) * (hig // w)
+        nums += (wid // w) * (hig // w)  # 巧克力的长包含的边长数 * 巧克力的宽包含的边长数 == 这快巧克力可以分多少块边长为 w 的巧克力
 
         if nums >= k:
             return True
@@ -39,7 +39,7 @@ def check(w):
     return False
 
 
-# 二分法逐个测试,左右指针
+# 二分法逐个测试,左右指针  这里其实是为了找一个边长，不断二分
 l, r = 1, 1000000
 while l <= r:  # 这里不写等于只能通过62.5%
     mid = (l + r) // 2
