@@ -35,9 +35,10 @@ class Solution:
         # return res
 
         # 动态规划 ,显示是超时了
-# class Solution:
-#     def LCS(self, str1: str, str2: str) -> str:
-#         # dp_about_lqb[i][j]表示到str1第i个个到str2第j个为止的公共子串长度
+        # class Solution:
+        #   def LCS(self, str1: str, str2: str) -> str:
+        #   dp_about_lqb[i][j]表示到str1第i个个到str2第j个为止的公共子串长度
+        #   请注意 最长公共子串和最长公共子序列是不一样得
         dp = [[0] * (len(str2) + 1) for i in range(len(str1) + 1)]
         max = 0
         pos = 0
@@ -55,4 +56,3 @@ class Solution:
                     max = dp[i][j]
                     pos = i - 1
         return str1[pos - max + 1: pos + 1]
-

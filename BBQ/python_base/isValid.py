@@ -34,7 +34,7 @@ class Solution:
             elif len(st) == 0:
                 return False
 
-            elif (st[-1] == element):
+            elif st[-1] == element:
                 st.pop()
 
         return len(st) == 0
