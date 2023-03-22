@@ -50,7 +50,7 @@ class Solution:
                     dp[i][j] = dp[i - 1][j - 1] + 1
                 else:
                     # 该位置为0
-                    dp[i][j] = 0
+                    dp[i][j] = 0  # 最长公共子串这里是0 最长公共子序列则这里是两个字符串的最大值
                     # 更新最大长度
                 if dp[i][j] > max:
                     max = dp[i][j]

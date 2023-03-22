@@ -12,7 +12,7 @@ class Solution:
                 if text2[i - 1] == text1[j - 1]:
                     dp[i][j] = dp[i - 1][j - 1] + 1
                 else:
-                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])  # 如果是最长公共子串 这里就是0了 因为 不是子串了 在 ./lcs里面看
 
         return dp[len(text2)][len(text1)]  # leetcode用下面输出方式报错，一般是return值，和需要输入输出下面的方式 是不一样的
         # print(dp[len(text2)][len(text1)], end='')
