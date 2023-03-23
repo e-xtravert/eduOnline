@@ -23,7 +23,6 @@ class Solution:
 
         # return jumpFloor(number - 1) + jumpFloor(number - 2) 或者直接把他的方法删掉，然后自定义函数时可以return自己的
 
-
         if number <= 1:
             return 1
 
@@ -40,11 +39,11 @@ class Solution:
 
 # 递归法
 class Solution:
-    def jumpFloor(self , number: int) -> int:
-        #从0开始，第0项是1，第一项是1
+    def jumpFloor(self, number: int) -> int:
+        # 从0开始，第0项是1，第一项是1
         if number <= 1:
             return 1
-        #根据公式递归调用函数，原来是要使用self调用函数
+        # 根据公式递归调用函数，原来是要使用self调用函数
         return self.jumpFloor(number - 1) + self.jumpFloor(number - 2)
 
 
@@ -84,7 +83,6 @@ import sys
 inp = int(input())
 
 # print(inp)
-
 
 
 if inp <= 1:

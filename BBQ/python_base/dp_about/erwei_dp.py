@@ -27,6 +27,7 @@ def score(char):
         return 1
     return 0
 
+
 for i in range(n):
     for j in range(0, m):
         dp[i + 1][j + 1] = max(dp[i][j + 1] + score(map1[i][j]), dp[i + 1][j] + score(map1[i][j]))

@@ -1,6 +1,8 @@
 '''
 
 牛客dp41，背包问题
+2023年3月23日21点39分
+背包问题还是不熟悉 改天把背包问题所有情况的题目都熟悉一遍
 '''
 
 n, V = map(int, input().split())
@@ -10,7 +12,6 @@ for i in range(n):
     lis = list(map(int, input().split()))
     v.append(lis[1])
     w.append(lis[0])
-
 
 
 # dp = [[0] * (V + 1) for i in range(n)]
