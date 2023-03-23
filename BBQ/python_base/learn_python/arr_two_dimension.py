@@ -5,5 +5,5 @@
 
 arr = [[0] * 3 for _ in range(4)]  # 我在这里定义得时候是先把列填完 然后循环几行
 
-print(arr[2][3])  # list index out of range
+# print(arr[2][3])  # list index out of range
 print(arr[3][2])  # 0 读取要写成几行几列 这和自己常用定义二维数组得方式是不同 不要想当然
