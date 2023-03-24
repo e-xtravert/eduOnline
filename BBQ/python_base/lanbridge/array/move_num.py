@@ -36,6 +36,7 @@ anther
 '''
 
 # 思路很简单 就是用两个数组 一个数组存放数据 另一个数组存放 他的反转数列 然后用两个数组的拼接模拟 数组移动
+# 但是很可惜 错了 应该是模拟出错了
 n, m, k = map(int, input().split())
 lis = [int(i) for i in input().split()]  # 别搞错了
 lis.reverse()
