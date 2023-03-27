@@ -4,6 +4,7 @@
 1 2 3 4
 5 5 5 5
 3
+贪心正确网址https://www.luogu.com.cn/problem/solution/P8800
 '''
 # 这是贪心 但是没有通过
 n, m = map(int, input().split())

@@ -4,7 +4,7 @@
 1 2 3 4
 5 5 5 5
 3
-还是没有通过全部的测试用例
+还是没有通过全部的测试用例， 应该是没有完全还原，python写算法真的难受
 '''
 
 n, m = map(int, input().split())
@@ -14,7 +14,7 @@ res = 0
 
 
 def check(x):
-    sum_ = 0  # 用了几张空白排
+    sum_ = 0  # 用了几张空白牌
     for i in range(n):
         if x - a[i] > b[i]:  # 如果需要构成的套数 x 比当前的数量和手写的加起来还要多， 说明不够
             return False
@@ -32,7 +32,7 @@ while l <= r:  # 加上等于洛谷多通过一道题
     mid = (l + r) // 2
     if check(mid):
         res = mid  # 如果符合条件 说明 x 即 mid 还可以更大 试试更大的值 即满足条件最大的嘛
-        l = mid + 1
+        l = mid + 1  # 但是这里没有加1 会有很大的问题
     else:
         r = mid - 1
 
