@@ -1,10 +1,10 @@
 '''
 
 牛客dp-34
+在lanqiaobridge的enumerate中也有
 '''
 
-
-
+# 在对一些求子矩阵 子数组和的情况下 都可以考虑前缀和的方法
 n, q = map(int, input().strip().split())
 data = list(map(int, input().strip().split()))
 
