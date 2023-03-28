@@ -11,7 +11,7 @@ data = list(map(int, input().strip().split()))
 pre = [0 for i in range(n)]
 pre[0] = data[0]
 
-for i in range(1, n):
+for i in range(1, n):  # 前缀和保存的是前面的元素和 和当前元素的和
     pre[i] = pre[i - 1] + data[i]
 
 for i in range(q):

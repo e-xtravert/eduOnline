@@ -9,3 +9,4 @@ input
 output
 19
 '''
+# 前缀和做法 https://www.luogu.com.cn/blog/gesong/solution-p8783

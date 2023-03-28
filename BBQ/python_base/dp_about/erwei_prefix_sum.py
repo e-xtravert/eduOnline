@@ -14,11 +14,11 @@ for i in range(len(arr)):
         if i == 0 and j == 0:
             pre[i][j] = arr[i][j]
         # 先对第0行和第1行进行处理
-        if i == 0:  # 上面处理了 同时为0的情况 下面就可以单独分析
+        if i == 0:  # 上面处理了 同时为0的情况 下面就可以单独分析 就和一维数组前缀和一样
             pre[i][j] = pre[i][j - 1] + arr[i][j]
         if j == 0:
             pre[i][j] = pre[i - 1][j] + arr[i][j]
         else:
-            pre[i][j] = pre[i][j - 1] + pre[i - 1][j] + arr[i][j] - pre[i - 1][j - 1]
+            pre[i][j] = pre[i][j - 1] + pre[i - 1][j] + arr[i][j] - pre[i - 1][j - 1]  # 减去是因为多加的 自己画个图就知道了
 
 print(pre)
