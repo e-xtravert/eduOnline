@@ -10,3 +10,6 @@ output
 19
 '''
 # 前缀和做法 https://www.luogu.com.cn/blog/gesong/solution-p8783
+
+
+# 双指针做法 python 写个指针是真的麻烦 还是c++好
