@@ -9,6 +9,7 @@ output
 n = int(input())
 res = []
 
+
 # 用一个单独的函数求比较合适
 def isPrime(x):
     if x == 1:
