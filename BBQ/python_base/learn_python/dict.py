@@ -44,3 +44,8 @@ print(ret)  # {'price': 666, 'name': 'rdw'}
 '''
 
 # 还有一些排序的用法放在typora了
+
+# set() 函数创建一个无序不重复元素集
+s = set()
+s.add('fdasf')
+print(s)
