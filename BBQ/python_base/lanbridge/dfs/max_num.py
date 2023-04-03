@@ -1,7 +1,6 @@
 # @Time    : 2023/3/29 9:38
 '''
 给定一个正整数  。你可以对
-
 将该位数字加 1 。如果该位数字已经是 9 , 加 1 之后变成 0 。
 将该位数字减 1 。如果该位数字已经是 0 , 减 1 之后变成 9 。
 你现在总共可以执行 1 号操作不超过  次, 2 号操作不超过  次。 请问你最大可以将
@@ -15,11 +14,13 @@
 n, a, b = map(int, input().split())
 ans = 0
 n = str(n)
+# print(n)
 
 
 def dfs(i, v):
     global a, b, ans
     if i >= len(str(n)):
+        ans = max(ans, v)
         return
     x = int(n[i])
     if n[i]:
@@ -32,9 +33,28 @@ def dfs(i, v):
             b -= x + 1
             dfs(i + 1, v * 10 + 9)
             b += x + 1
-    else:
-        ans = max(ans, v)
+    # else:
+    #     ans = max(ans, v)
 
 
 dfs(0, 0)
 print(ans)
+
+'''
+一个题解
+n,a,b=map(int,input().split())
+li=list(map(int,list(str(n))))
+res=0
+def dfs(i,v,a,b):
+    global res
+    if i <len(li):
+        x=li[i]
+        d=min(a,9-x)
+        dfs(i+1,v*10+x+d,a-d,b)
+        if b>=x+1:
+            dfs(i+1,v*10+9,a,b-x-1)
+    else:
+        res=max(res,v)
+dfs(0,0,a,b)
+print(res)
+'''
