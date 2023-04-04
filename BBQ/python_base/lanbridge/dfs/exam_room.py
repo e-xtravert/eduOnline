@@ -16,7 +16,7 @@ output
 '''
 n = int(input())
 m = int(input())
-# 两两认识 有点像图 原本想用map 但是突然想到用数组
+# 两两认识 有点像图 原本想用map 但是突然想到用数组  数组表达是可以 但是用图更方便，省去对下标的关注
 peo = [[] for _ in range(n)]
 for i in range(m):
     a, b = map(int, input().split())
@@ -37,7 +37,7 @@ def check(p):
             return True
 
 # 先选一个人 然后找一个跟他不认识的 再找这个人不认识的 如果不能再找到了就退出 对除去这些人的集合再分
-def dfs(path_):
-    for i in path_:
-        if not check(i):
-            # todo
+# def dfs(path_):
+#     for i in path_:
+#         if not check(i):
+#

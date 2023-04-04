@@ -13,7 +13,7 @@ room是考场的关系矩阵；
 '''
 
 M = [[0 for _ in range(101)] for _ in range(101)]  # 等效于 int M[101][101];//关系矩阵 int room[101][101];//考场矩阵
-room = [[0 for _ in range(101)] for _ in range(101)]
+room = [[0 for _ in range(101)] for _ in range(101)]  # 第某个考场 某个位置
 ans = 9999
 n = int(input())
 m = int(input())
@@ -23,27 +23,28 @@ for i in range(m):
     M[b][a] = 1
 
 
+# 对于dfs 把需要遍历的值也作为参数放进函数当中
 def dfs(num, kcs):
     global ans
     if kcs >= n:
         return
     if num > n:
-        ans = kcs
-    else:
-        for i in range(1, kcs + 1):
+        ans = min(kcs, ans)
+    else:  # 注意这里else 而不是直接 不能省略
+        for i in range(1, kcs + 1):  # 对学生和当前的考场数都要遍历
             k = 0
             while room[i][k] and M[num][room[i][k]] == 0:
-                k += 1
+                k += 1  # 说明这个考场可以坐人 k ++ 去找下一个位置 再判断
 
-            if room[i][k] == 0:
+            if room[i][k] == 0:  # 如果考场某个位置没有人 第 k 个位置给 num
                 room[i][k] = num
                 dfs(num + 1, kcs)
                 room[i][k] = 0
 
-        room[kcs + 1][0] = num
+        room[kcs + 1][0] = num  # 如果已有的考场都不能放下 num 那么需要新一个考场 把第一个位置放num
         dfs(num + 1, kcs + 1)
         room[kcs + 1][0] = 0
 
 
-dfs(1, 1)
+dfs(1, 0)
 print(ans)
