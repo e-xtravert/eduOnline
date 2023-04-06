@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <unordered_map>
 using namespace std;
+
 // 用于记录当前状态是否被搜索过
 unordered_map<string, bool> m;
 bool check(string s) {
@@ -19,10 +20,10 @@ bool dfs(string s) {
   for (int i = 0; i < 8; ++i) {
       if (s[i] == '0') {
           string tmp = s;
-          tmp[i] = 'X';
+          tmp[i] = 'X';  // 将修改后的s传入下次dfs
           // 如果下一步是必败的，那么我们这步必胜
           if (!dfs(tmp))
-              return m[s] = 1;
+              return m[s] = 1;  // 对于每一步的改变后的s做标记
       }
   }
   // 模拟下一步是二颗棋子
@@ -47,4 +48,5 @@ int main() {
   }
   return 0;
 }
+
 '''
