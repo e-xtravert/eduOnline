@@ -20,6 +20,7 @@ s = 0
 for i in range(n):
     s += jie(a[i])
 
+# print(s)
 
 def check(n):
     s0 = 1
