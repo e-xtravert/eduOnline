@@ -26,7 +26,7 @@ for _ in range(N):
     dp[j] = max(dp[j], dp[j-w]+v)
 print(dp[-1])
 
-# 完全背包问题
+# 02完全背包问题
 # 修改第一种判断条件的方式解决完全背包问题
 n, v = map(int, input().split())
 dp = [[0] * (v + 1) for i in range(n + 1)]
@@ -50,7 +50,7 @@ for _ in range(N):
     dp[j] = max(dp[j], dp[j-w]+v)
 print(dp[-1])
 
-# 多重背包问题 就是说物品的数量是有限制的
+# 03多重背包问题 就是说物品的数量是有限制的
 import os
 import sys
 
@@ -70,7 +70,7 @@ for i in range(1, N + 1):
 print(dp[N][V])
 
 
-# 物品有无限多个情况 当si=0表示无限多的情况
+# 04物品有无限多个情况 当si=0表示无限多的情况
 import os
 import sys
 
@@ -89,6 +89,58 @@ for a in range(1,n+1):
       count=min(b//wd[a-1][0],wd[a-1][2])
     fd[b]=max([fd[b-i*wd[a-1][0]]+wd[a-1][1]*i for i in range(count+1)])
 print(fd[-1])
+
+# 05分组背包 第i组里有si件物品
+import os
+import sys
+
+# 请在此输入您的代码
+
+# 滚动数组的写法
+N, V = map(int, input().split())
+group = []
+for i in range(N):
+    s = int(input())
+    each_group = [list(map(int, input().split())) for i in range(s)]
+    group.append(each_group)
+
+dp = [0] * (V + 1)
+# 枚举每一组
+for i in range(1, N + 1):
+    # 枚举体积
+    for j in range(V, -1, -1):
+        # 枚举每组的每件物品
+        for w, v in group[i  - 1]:
+            if j >= w:
+                dp[j] = max(dp[j], dp[j - w] + v)
+
+print(dp[V])
+
+# 用二维数组的dp
+import os
+import sys
+
+# 请在此输入您的代码
+
+# N组物品，背包容积为V
+N, V = map(int, input().split())
+dp = [[0] * (V + 1) for i in range(N + 1)]
+
+# 枚举每组
+for i in range(1, N + 1):
+    s = int(input())
+    # 枚举每一组的每一件物品
+    for _ in range(s):
+        # 每一组中每一件物品的体积和价值
+        w, v = map(int, input().split())
+        for j in range(1, V + 1):
+            """和01背包的区别，每组中要选出最大价值的那个物品"""
+            if j < w:
+                dp[i][j] = max(dp[i][j], dp[i - 1][j])  # 和当前价值取max，找出最大的
+            else:
+                dp[i][j] = max(dp[i][j], dp[i - 1][j], dp[i - 1][j - w] + v) # 和当前价值取max，找出最大的
+
+print(dp[N][V])
 
 
 
