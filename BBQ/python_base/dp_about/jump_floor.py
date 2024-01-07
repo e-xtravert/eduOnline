@@ -97,4 +97,40 @@ else:
         a = b
         b = res
 
+        # a, b = b, a + b
+
     print(res)
+
+
+# Fibonacci数列还有就是用矩阵乘法的方式
+MOD = 10**9 + 7
+
+def mat_mul(A, B, mod=MOD):
+    """矩阵乘法"""
+    return [[sum(x * y % mod for x, y in zip(A_row, B_col)) % mod
+             for B_col in zip(*B)] for A_row in A]
+
+def mat_pow(A, n, mod=MOD):
+    """矩阵快速幂"""
+    result = [[1, 0], [0, 1]]  # 初始化为单位矩阵
+    while n > 0:
+        if n % 2 == 1:
+            result = mat_mul(result, A, mod)
+        A = mat_mul(A, A, mod)
+        n //= 2
+    return result
+
+# 读取输入得到查询的个数
+n = int(input())
+
+# 对每个查询进行处理
+for _ in range(n):
+    m = int(input())
+    if m <= 2:
+        print(1)
+        continue
+    base_matrix = [[1, 1], [1, 0]]
+    # 应用矩阵快速幂得到斐波那契数
+    fib_matrix = mat_pow(base_matrix, m-1)
+    print(fib_matrix[0][0])  # 斐波那契数位于结果矩阵的左上角
+

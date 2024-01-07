@@ -56,3 +56,38 @@ class Solution:
                     max = dp[i][j]
                     pos = i - 1
         return str1[pos - max + 1: pos + 1]
+
+# 数组的最长公共子序列不能直接使用上面的滑动窗口（那个 in 好像不使用）
+# 下面是数组的最长公共子序列的公式 注意这是子序列 不是子串
+n,m=map(int,input().split())
+a=[0]+list(map(int,input().split()))  # 加个0和后面的对应
+b=[0]+list(map(int,input().split()))
+dp=[[0]*(m+1) for i in range(n+1)]
+
+for i in range(1,n+1):
+    for j in range(1,m+1):
+        if a[i]==b[j]:
+            dp[i][j]=dp[i-1][j-1]+1
+        else:
+            dp[i][j]=max(dp[i-1][j],dp[i][j-1])
+print(dp[n][m])
+
+# 最长公共上升序列 不太懂下面这个
+import os
+import sys
+
+# 请在此输入您的代码
+N, M = map(int, input().split())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
+dp = [0 for _ in range(1001)]
+for i in range(N):
+    value = 0
+    for j in range(M):
+        if a[i] == b[j]:
+            dp[j] = max(dp[j], value + 1)
+        if a[i] > b[j]:
+            value = max(value, dp[j])
+    count = max(dp)
+    # print(dp)
+print(count)
