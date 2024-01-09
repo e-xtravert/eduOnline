@@ -91,3 +91,6 @@ for i in range(N):
     count = max(dp)
     # print(dp)
 print(count)
+
+
+# 2024年1月8日11点25分 蓝桥杯一道前缀问题使用了双指针 很舒服
