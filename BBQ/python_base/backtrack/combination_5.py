@@ -13,7 +13,7 @@ target = int(input())
 res = 0
 path = []
 
-
+# 新世纪不需要这么写了 直接sum不行？
 def path_sum(arr):
     s = 0
     for i in arr:
@@ -30,7 +30,7 @@ def backtrack(arr):
 
     for i in range(len(arr)):
         path.append(arr[i])
-        backtrack(arr)
+        backtrack(arr)  # 能重复选数的情况就不需要 在下一个选
         path.pop(-1)
 
 

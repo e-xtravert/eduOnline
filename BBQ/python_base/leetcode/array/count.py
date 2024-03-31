@@ -57,6 +57,7 @@
 # count1 = collections.Counter(s)['f']
 # print(count1)
 import collections
+import math
 
 # def countSubstrings(s: str, c: str) -> int:
 #     # 双指针拿捏一下
@@ -114,6 +115,54 @@ print(stock[:3])
 print(collections.Counter(stock))
 for i, val in collections.Counter(stock).items():
     print(val)
-stocks = [1, 2, 3, 4]
+count = collections.Counter(stock).items()
+stocks = [1, 2, 3, 4, 4]
 stocks.pop()
 print(stocks)
+print(set(stocks))
+
+# s = input()
+# dp = [0] * len(s)
+# # print(dp)
+# #
+# # print(len(set(s)))
+#
+# def strs(s):
+#     # if len(s) > 2 * len(set(s)):
+#     #     return False
+#     # return True
+#     for i, val in collections.Counter(s).items():
+#         if val > 2:
+#             return False
+#     return True
+# tmp = 0
+# i, j = 0, 1
+# while i < len(s) and j < len(s):
+#     if j == len(s) - 1 and strs(s[i:j + 1]):
+#         tmp = max(tmp, j - i + 1)
+#     if strs(s[i:j + 1]):
+#         j += 1
+#     else:
+#         tmp = max(tmp, j - i)
+#         i += 1
+#         j = i + 1
+#
+# print(tmp)
+
+# nums = [1]
+# k = 11
+# tmp = 0
+# mins = k
+# if nums[0] == k:
+#     print(0)
+# for i in range(1, math.ceil(k / 2)):
+#     cnt = math.ceil(k / i)
+#     mins = min(i + cnt - 1, mins)
+# print(mins - 1)
+
+print('---------------------------------')
+
+k = 1.5
+print(k / 2)
+while k != 1 and k % 2 ==0:
+    k /= 2

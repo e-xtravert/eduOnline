@@ -22,7 +22,7 @@ def backtrack(nums, goal, start):
             path.append(nums[i])
             backtrack(nums, goal + nums[i], i)  # 这里没有加，所以还是从最开始循环，这样符合candidates数可以无限取
             # 上面那个注释修改一下，不是从最前面开始，而是从自己开始，如果不要自己，则要加1
-            # goal -= nums[i]  # 不需要减，为什么？
+            # goal -= nums[i]  # 不需要减，为什么？  # 因为返回上一层之后的goal就是之前的goal 而不是增加之后的
             path.pop(-1)
         # else:
         #     i += 1
