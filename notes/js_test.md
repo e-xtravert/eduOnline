@@ -1667,7 +1667,7 @@ loadsh库中的`_.cloneDeep()`
 
 ##### typeof 和 instanceof
 
-都是用来判断数据类型的方法 typeof可以判断基本数据类型 将数组和对象判断为对象 函数判断为函数`Function` 
+都是用来判断数据类型的方法 typeof可以判断基本数据类型（null除外）  将数组和对象判断为对象 函数判断为函数`Function` 
 
 instanceof字面理解就是判断是否是某某的实例对象 官方说法是判断**构造函数的`prototype`是否在实例对象的原型链上**
 
@@ -1706,6 +1706,10 @@ Object.prototype.toString.call({})  // 同上结果，加上call也ok
 Object.prototype.toString.call(1)    // "[object Number]"
 Object.prototype.toString.call('1')  // "[object String]"
 ~~~
+
+
+
+
 
 ##### 数据类型
 
@@ -1960,6 +1964,97 @@ Function.__proto__ === Function.prototype
 
 
 
+震坤行面试题
+
+> 如何遍历对象的属性？如何遍历原型上的属性？
+
+可以通过对象的方法`hasOwnProperty`判断是否是对象自身的属性，那怎么遍历原型上的方法呢？
+
+1.结合`for ... in和hasOwnProperty` `for...in可以遍历对象的所有可枚举属性`，然后使用`hasOwnProperty`排除自身的属性就可以了
+
+~~~JavaScript
+function Person(name) {
+    this.name = name;
+}
+Person.prototype.age = 30;
+Person.prototype.greet = function() {
+    console.log('Hello, ' + this.name);
+};
+const person = new Person('Alice');
+
+for (const key in person) {
+    if (!person.hasOwnProperty(key)) {
+        console.log(key, person[key]); // 输出原型上的属性
+    }
+}
+~~~
+
+2.使用`Object.getPrototypeOf`方法获取对象的原型，然后遍历原型上的属性
+
+~~~JavaScript
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.age = 30;
+Person.prototype.greet = function() {
+    console.log('Hello, ' + this.name);
+};
+
+const person = new Person('Alice');
+const proto = Object.getPrototypeOf(person);
+
+for (const key in proto) {
+    if (proto.hasOwnProperty(key)) {
+        console.log(key, proto[key]); // 输出原型上的属性
+    }
+}
+~~~
+
+3.使用`Object.getOwnPropertyNames`方法获取对象原型上的所有属性
+
+~~~JavaScript
+function Person(name) {
+    this.name = name;
+}
+
+Person.prototype.age = 30;
+Person.prototype.greet = function() {
+    console.log('Hello, ' + this.name);
+};
+
+const person = new Person('Alice');
+const proto = Object.getPrototypeOf(person);
+const protoProps = Object.getOwnPropertyNames(proto);
+
+protoProps.forEach(key => {
+    console.log(key, proto[key]); // 输出原型上的属性
+});
+~~~
+
+
+
+**`for ... in和for...of`的区别**
+
+in是遍历对象的可枚举属性 包括自身和原型链的属性 不严格按序
+
+of是遍历可迭代对象（如数组、字符串、`Map`、`Set` 等）的**元素**，不包括对象的属性，按照属性的顺序遍历
+
+~~~JavaScript
+const arr = ['Alice', 'Bob', 'Charlie'];
+
+for (const value of arr) {
+    console.log(value);
+}
+
+// 输出：
+// Alice
+// Bob
+// Charlie
+~~~
+
+
+
 ##### 继承
 
 原型链继承
@@ -1988,6 +2083,51 @@ addEventListener(eventType, handler, useCapture)
 
 
 
+##### 事件循环
+
+JavaScript是单线程的 因为JavaScript最初操作DOM的 如果多线程可能回造成混乱
+
+同步任务
+
+异步任务
+
+宏任务
+
+微任务
+
+async是直接执行（当然是在调用的情况下）里面的同步任务 await直接执行紧跟着的异步任务 但是阻塞语句 后面的任务
+
+promise直接执行里面的同步任务 then需要放微任务队列（先进先出）
+
+~~~JavaScript
+async function async1() {
+    console.log('async1 start')
+    await async2()  // 这个是在函数中直接执行的
+    console.log('async1 end')  // 但是这个是阻塞的 放在队列中
+}
+async function async2() {
+    console.log('async2')
+}
+console.log('script start')
+setTimeout(function () {
+    console.log('settimeout')  
+})
+async1()
+new Promise(function (resolve) {
+    console.log('promise1')
+    resolve()
+}).then(function () {
+    console.log('promise2')
+})
+console.log('script end')
+~~~
+
+
+
+**答案**
+
+最后的结果是：`script start`、`async1 start`、`async2`、`promise1`、`script end`、`async1 end`、`promise2`、`settimeout`
+
 
 
 #### 牛客JavaScript
@@ -2006,11 +2146,43 @@ indexOf()方法与includes()方法的一个重要区别在于indexOf()并不能�
 
 
 
-call
+##### call，apply，bind
 
-call()方法,第一个参数和apply()一样,是在其中运行的作用域即this;和apply()不同的是,call()方法中的其余的参数必须直接传给函数,即在使用call()方法时参数必须逐个的列出来.
+call()方法,第一个参数和apply()一样,是在其中运行的作用域即this;
 
- 
+和apply()不同的是,apply传入一个数组，
+
+call()方法中的其余的参数必须直接传给函数，传入参数列表，可以用扩展运算符的形式, 即在**使用call()方法时参数必须逐个的列出来.**
+
+bind方法和call很相似，第一参数也是`this`的指向，后面传入的也是一个参数列表(但是这个参数列表可以分多次传入)
+
+bind改变`this`指向后不会立即执行，而是返回一个永久改变`this`指向的函数
+
+~~~JavaScript
+function fn(...args){
+    console.log(this,args);
+}
+let obj = {
+    myname:"张三"
+}
+
+const bindFn = fn.bind(obj); // this 也会变成传入的obj ，bind不是立即执行需要执行一次
+bindFn(1,2) // this指向obj
+fn(1,2) // this指向window
+~~~
+
+**总结**
+
+从上面可以看到，`apply`、`call`、`bind`三者的区别在于：
+
+- 三者都可以改变函数的`this`对象指向
+- 三者第一个参数都是`this`要指向的对象，如果如果没有这个参数或参数为`undefined`或`null`，则默认指向全局`window`
+- 三者都可以传参，但是`apply`是数组，而`call`是参数列表，且`apply`和`call`是一次性传入参数，而`bind`可以分为多次传入
+- `bind`是返回绑定this之后的函数，`apply`、`call` 则是立即执行
+
+
+
+
 
 ##### **this**
 
@@ -2202,7 +2374,7 @@ Object.prototype.toString() 为 Object 对象的实例方法，默认情况下�
 
 
 
-js数据类型
+##### js数据类型
 
 原始类型和引用类型
 
@@ -2282,15 +2454,16 @@ var f=new F();
 
 这里的F实际是一个Function构造函数的实例，通过new关键字其实是创建实例对象的一种方式，而不是创建构造函数实例
 
+
+
+##### new发生了什么
+
 下面是使用new发生的事情，new 构造函数究竟做了什么就行了 
 
-  \1. 创建一个空对象  
-
-  \2. 将空对象的原型设置为构造函数的原型 
-
-  \3. 改变空对象的this指向为构造函数，并执行构造函数，将其中的成员变量更新到空对象中 
-
-  \4. 返回这个空对象 
+1. 创建一个空对象  
+2. 将空对象的原型设置为构造函数的原型 
+3. 改变空对象的this指向为构造函数，并执行构造函数，将其中的成员变量更新到空对象中 目的就是将this指向新对象
+4. 返回这个空对象 
 
 
   对应的代码类似这样 
@@ -2300,15 +2473,61 @@ var obj  = {};
 obj.__proto__ = F.prototype;
 F.call(obj);
 return obj
+
+// 完整版
+function mynew(Func, ...args) {
+    // 1.创建一个新对象
+    const obj = {}
+    // 2.新对象原型指向构造函数原型对象
+    obj.__proto__ = Func.prototype
+    // 3.将构建函数的this指向新对象
+    let result = Func.apply(obj, args)
+    // 4.根据返回值判断
+    return result instanceof Object ? result : obj
+}
 ```
 
 
 
-
+##### 冒泡
 
 是否支持冒泡
 
 <img src="../assets/image-20241105155020186.png" alt="image-20241105155020186" style="zoom:80%;" />
+
+
+
+
+
+跟冒泡相关的还有一个事件代理
+
+##### 事件代理
+
+> 事件代理，俗地来讲，就是把一个元素响应事件（`click`、`keydown`......）的函数委托到另一个元素
+>
+> 前面讲到，事件流的都会经过三个阶段： 捕获阶段 -> 目标阶段 -> 冒泡阶段，而事件委托就是在冒泡阶段完成
+
+为什么这么说 因为我们通常把事件绑定到父元素 然后子元素执行的时候冒泡到父元素 再通过父元素去处理
+
+这样避免了子元素较多 需要大量循环处理 和动态修改子元素时候的复杂 因为我们如果要给新增的元素绑定事件 就会很麻烦
+
+**总结**
+
+适合事件委托的事件有：`click`，`mousedown`，`mouseup`，`keydown`，`keyup`，`keypress`
+
+从上面应用场景中，我们就可以看到使用事件委托存在两大优点：
+
+- 减少整个页面所需的内存，提升整体性能
+- 动态绑定，减少重复工作
+
+但是使用事件委托也是存在局限性：
+
+- `focus`、`blur`这些事件没有事件冒泡机制，所以无法进行委托绑定事件
+- `mousemove`、`mouseout`这样的事件，虽然有事件冒泡，但是只能不断通过位置去计算定位，对性能消耗高，因此也是不适合于事件委托的
+
+如果把所有事件都用事件代理，可能会出现事件误判，即本不该被触发的事件被绑定上了事件
+
+
 
 
 
@@ -2324,7 +2543,7 @@ return obj
 
 
 
-history对象
+##### history对象
 
 history保存了历史对象，location保存了URL对象，navigator保存了浏览器对象，screen显示器对象
 
@@ -2410,7 +2629,7 @@ const deepCopy = _.cloneDeep(original);
 
 
 
-防抖节流
+##### 防抖节流
 
 防抖：在指定时间间隔内只会执行一次，一般用于等待用户操作完之后执行
 
