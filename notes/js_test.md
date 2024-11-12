@@ -941,7 +941,7 @@ compile订阅数据变化，绑定更新函数和watcher（key每更新一次都
 
 
 
-#### 响应式用法
+##### 响应式用法
 
 reactive：
 
@@ -1216,9 +1216,29 @@ var允许 let const在同一作用域不允许
 
 ###### 对象新增的扩展
 
-属性的5种遍历方法
+属性的5种遍历方法	
+
+使用`for...in` 可以遍历对象自身和继承的可枚举属性
+
+使用`Object.keys(boj)` 返回自身的可枚举属性 不包括继承的
+
+`Object.getOwnPropertyNames(obj)`返回自身的所有属性 包括不可枚举的属性
+
+
+
+**可枚举属性和不可枚举属性**
+
+理解上： 表示这个属性是否是可以被枚举 是这个属性的tag 不是说在某个对象中的属性枚举
+
+**可枚举属性**：属性的 `enumerable` 特性为 `true`，可以通过 `for...in` 循环或 [Object.keys()](vscode-file://vscode-app/d:/vscode/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 方法遍历到。
+
+**不可枚举属性**：属性的 `enumerable` 特性为 `false`，不能通过 `for...in` 循环或 [Object.keys()](vscode-file://vscode-app/d:/vscode/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 方法遍历到。
+
+
 
 对象新增的方法
+
+记几个好记的：`Object.is()`和`===`意义差不多；`Object.assign()`合并对象 注意是浅拷贝；`Object.getPrototypeOf()`获取对象的原型 `Object.keys()`返回可枚举属性
 
 
 
@@ -1802,9 +1822,9 @@ concat()
 
 `slice()`
 
-`substr()`
+`substr()`  获取第一个参数下标开始  共第二个参数个字符
 
-`substring()`
+`substring()`  获取输入参数下标之间对应的字串
 
 改
 
@@ -2076,9 +2096,13 @@ Expires设置过期时间 Max-Age在失效之前需要经过的秒数
 
 
 
-sessionStorage和localStorage 不能存储对象属性 后者需要手动删除 前者关闭页面就会清除
+sessionStorage和localStorage 不能存储对象属性 后者需要手动删除 前者关闭页面就会清除  
+
+只能存入字符串，无法直接存对象
 
 可以用来保存用户的偏好设置啊之类的
+
+
 
 indexedDb 存储结构化数据 大量的数据
 
@@ -2238,7 +2262,7 @@ fn(1,2) // this指向window
 - 三者都可以改变函数的`this`对象指向
 - 三者第一个参数都是`this`要指向的对象，如果如果没有这个参数或参数为`undefined`或`null`，则默认指向全局`window`
 - 三者都可以传参，但是`apply`是数组，而`call`是参数列表，且`apply`和`call`是一次性传入参数，而`bind`可以分为多次传入
-- `bind`是返回绑定this之后的函数，`apply`、`call` 则是立即执行
+- **`bind`是返回绑定this之后的函数，`apply`、`call` 则是立即执行**
 
 
 
@@ -3000,3 +3024,25 @@ html全局属性：所有标签都可以使用的属性
 
 - **容器**：使用 `display: flex;` 定义一个弹性容器，并设置主轴方向为水平（`flex-direction: row;`），项目换行（`flex-wrap: wrap;`），在主轴上均匀分布（`justify-content: space-between;`），在交叉轴上居中对齐（`align-items: center;`）。
 - **项目**：设置项目的背景颜色、内边距、外边距和弹性属性（`flex: 1 1 100px;`），使其在容器中具有相同的放大和缩小比例，初始大小为 100px。
+
+
+
+#### 学年鉴定表内容
+
+导师意见
+
+该同学思想端正，追求进步，团结同学，学习态度端正，学习主动性强，学习成绩较为优秀，并取得了一定的研究进展，综合表现良好。
+
+
+
+班组意见：
+
+郑晋斌同学在过去的一年中，关心同学，积极配合班级工作，参加班级活动，为班级获得荣誉，具有较强的集体荣誉感。 
+
+班长：万前程
+
+
+
+学院意见：
+
+郑晋斌同学在过去一年中，关心同学，乐于助人，积极参与各类活动，为集体获得荣誉，具有服务意识和团队精神，有较强的解决问题能力和动手能力，工作认真负责，具有一定的担当和责任感。
